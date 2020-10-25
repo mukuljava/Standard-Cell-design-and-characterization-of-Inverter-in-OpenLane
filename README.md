@@ -22,11 +22,11 @@ Openlane is an automated RTL to GDSII flow based on several components embedded 
 
 The normal generalized ASIC flow starts from Synthesis of RTL netlist and ends to getting GDSII file streamed after doing floorplanning, placement, timing analysis and routing.
 
-### - Synthesis
+### Synthesis
 
 It converts RTL to a circuit out of components from standard cell library i.e creating gate level netlist using Yosys tool which is embedded inside of Openlane flow.
 
-### - Floorplanning 
+### Floorplanning 
 
 Floorplanning is all about arranging system building blocks, pre-placed cells, decoupling capacitors, power planning, I/O pads placement in a proper way. Here power planning is done after routing. These pre-placed cells  such as SRAM, ADC/DAC, PLL are called as IPs (Intellectual Property). 
 
@@ -43,6 +43,6 @@ It can be defined as the ratio of Height and Width of die
 
 i.e. Aspect Ratio = Height / Width
 
-### - Placement
+### Placement
 
 Placement of the cells on floorplan rows aligned with the sites is called as placement. It is usually done in two steps : Detailed and GLobal.
