@@ -4,21 +4,25 @@ The project involves the full ASIC implementation steps from RTL to GDSII, where
 
 # Contents
 
-1. Introduction to Openlane flow
+[1. Introduction to Openlane flow](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#1-introduction-to-openlane)
 
-2. Physical Design Flow
+[2. Physical Design Flow](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#2-physical-design-flow)
 
-3. Invoking and running Openlane
+[3. Invoking and running Openlane]()
 
 # 1. Introduction to Openlane
 
 Openlane is an automated RTL to GDSII flow based on several components embedded inside it: OpenROAD, Yosys, Magic etc. and consists different scripts, design exploration and optimization techniques. Openlane is built around Google's skywater 130nm process node and has the ability to perform full automated RTL to GDSII flow.
 
-### Openlane Architecture
+### Openlane Architecture flow
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/openlane_flow.png)
 
 # 2. Physical Design Flow
 
 ## Simplified RTL to GDSII flow
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/simplified%20rtl%20to%20gdsii%20flow.png)
 
 The normal generalized ASIC flow starts from Synthesis of RTL netlist and ends to getting GDSII file streamed after doing floorplanning, placement, timing analysis and routing.
 
