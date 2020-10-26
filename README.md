@@ -22,7 +22,7 @@ Openlane is an automated RTL to GDSII flow based on several components embedded 
 
 ## Simplified RTL to GDSII flow
 
-![alt text]()
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/simplified%20rtl%20to%20gdsii%20flow.png)
 
 The normal generalized ASIC flow starts from Synthesis of RTL netlist and ends to getting GDSII file streamed after doing floorplanning, placement, clock tree synthesis and routing.
 
