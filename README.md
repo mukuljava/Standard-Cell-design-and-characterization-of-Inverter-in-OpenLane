@@ -39,13 +39,13 @@ The normal generalized ASIC flow starts from Synthesis of RTL netlist and ends t
 - Power Distribution Network (PDN) is framed so that the cells or IPs or Macros get desired voltage.
 
 A chip to have a good floorplan following things should be taken under consideration:
-- Utilization Factor
+- Utilization Factor:
 
 It can be defined as the ratio of total area occupied by netlist to the total area of the cell 
 
 i.e. Utilization Factor = Total area occupied by netlist / Total area of the cell
   
-- Aspect Ratio
+- Aspect Ratio:
 
 It can be defined as the ratio of Height and Width of die
 
