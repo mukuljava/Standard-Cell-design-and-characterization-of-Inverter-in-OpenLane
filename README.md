@@ -22,17 +22,25 @@ Openlane is an automated RTL to GDSII flow based on several components embedded 
 
 ## Simplified RTL to GDSII flow
 
-![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/simplified%20rtl%20to%20gdsii%20flow.png)
+![alt text]()
 
-The normal generalized ASIC flow starts from Synthesis of RTL netlist and ends to getting GDSII file streamed after doing floorplanning, placement, timing analysis and routing.
+The normal generalized ASIC flow starts from Synthesis of RTL netlist and ends to getting GDSII file streamed after doing floorplanning, placement, clock tree synthesis and routing.
 
 ### Synthesis
 
-It converts RTL to a circuit out of components from standard cell library i.e creating gate level netlist using Yosys tool which is embedded inside of Openlane flow.
+- It converts RTL to a circuit out of components from standard cell library i.e creating gate level netlist using Yosys tool which is embedded inside of Openlane flow. 
+
+- Cell mappimg is done to define a particular area for cell placement.
+
+- Pre-Layout Static Timing Analysis is done using OpenSTA.
 
 ### Floorplanning 
 
-Floorplanning is all about arranging system building blocks, pre-placed cells, decoupling capacitors, power planning, I/O pads placement in a proper way. Here power planning is done after routing. These pre-placed cells  such as SRAM, ADC/DAC, PLL are called as IPs (Intellectual Property). 
+- Floorplanning is all about arranging system building blocks, pre-placed cells, decoupling capacitors, power planning, I/O pads placement in a proper way. Here power planning is done after routing. These pre-placed cells such as SRAM, ADC/DAC, PLL are called as IPs (Intellectual Property). 
+
+- Dimensions, pin locations and tracks of the cell are defined.
+
+- Power Distribution Network (PDN) is framed so that the cells or IPs or Macros get desired voltage.
 
 A chip to have a good floorplan following things should be taken under consideration:
 - Utilization Factor
@@ -49,4 +57,11 @@ i.e. Aspect Ratio = Height / Width
 
 ### Placement
 
-Placement of the cells on floorplan rows aligned with the sites is called as placement. It is usually done in two steps : Detailed and GLobal.
+- Placement of the cells on floorplan rows aligned with the sites is called as placement. It is usually done in two steps : Detailed and Global.
+
+- Detailed placement is done to legalize the global placement.
+
+### Clock Tree Synthesis
+
+- 
+
