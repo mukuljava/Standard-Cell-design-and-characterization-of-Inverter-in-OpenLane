@@ -8,7 +8,7 @@ The project involves the full ASIC implementation steps from RTL to GDSII, where
 
 [2. Physical Design Flow](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#2-physical-design-flow)
 
-[3. Invoking and running Openlane]()
+[3. Invoking and running Openlane](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#invoking-and-running-openlane)
 
 # 1. Introduction to Openlane
 
@@ -78,4 +78,4 @@ run_cts
 - Timing Verification like Static Timing Analysis
 - Lastly final GDSII layout file is streamed out from routed def(Magic).
 
-# Invoking and running Openlane
+# 3.Invoking and running Openlane
