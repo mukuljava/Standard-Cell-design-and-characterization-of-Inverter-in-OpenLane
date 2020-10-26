@@ -29,24 +29,20 @@ The normal generalized ASIC flow starts from Synthesis of RTL netlist and ends t
 ### Synthesis
 
 - It converts RTL to a circuit out of components from standard cell library i.e creating gate level netlist using Yosys tool which is embedded inside of Openlane flow. 
-
 - Cell mappimg is done to define a particular area for cell placement.
-
 - Pre-Layout Static Timing Analysis is done using OpenSTA.
 
 ### Floorplanning 
 
 - Floorplanning is all about arranging system building blocks, pre-placed cells, decoupling capacitors, power planning, I/O pads placement in a proper way. Here power planning is done after routing. These pre-placed cells such as SRAM, ADC/DAC, PLL are called as IPs (Intellectual Property). 
-
 - Dimensions, pin locations and tracks of the cell are defined.
-
 - Power Distribution Network (PDN) is framed so that the cells or IPs or Macros get desired voltage.
 
 A chip to have a good floorplan following things should be taken under consideration:
 - Utilization Factor
 
-It can be defined as the ratio of total area occupied by netlist to the total area of the cell
-  
+It can be defined as the ratio of total area occupied by netlist to the total area of the cell 
+
 i.e. Utilization Factor = Total area occupied by netlist / Total area of the cell
   
 - Aspect Ratio
@@ -58,10 +54,28 @@ i.e. Aspect Ratio = Height / Width
 ### Placement
 
 - Placement of the cells on floorplan rows aligned with the sites is called as placement. It is usually done in two steps : Detailed and Global.
-
 - Detailed placement is done to legalize the global placement.
 
 ### Clock Tree Synthesis
 
-- 
+- As the name suggests, clock tree is synthesized. Here the tool used is [TritonCTS](https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/TritonCTS) which is again part of Openlane flow. You just need to run the command in Openlane:
+```
+run_cts
+```
+- Create a clock distribution network including Flip Flops with minimum skew (although tough).
+- Usually the tree shapes like an H hence called H tree or X called X tree etc.
 
+### Routing
+
+- Implements interconnect using the available metal layers. These metal tracks form a huge routing grid.
+- Two types of routing:
+  - Fast route: Fast route engine (efficient and high quality)is used for global route. It generates routing guides for each of the nets. 
+  - Detailed route: Uses the routing guides from global routes and implement the actual wiring.
+
+### Sign-Off
+
+- It contains the Physical varifications like Design Rule Checking(DRC) and Layout vs Schematic(LVS)
+- Timing Verification like Static Timing Analysis
+- Lastly final GDSII layout file is streamed out from routed def(Magic).
+
+# Invoking and running Openlane
