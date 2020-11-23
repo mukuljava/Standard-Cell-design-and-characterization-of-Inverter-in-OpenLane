@@ -75,3 +75,36 @@ run_cts
 - Lastly final GDSII layout file is streamed out from routed def(Magic).
 
 # 3.Invoking and running Openlane
+
+### For open-source implementation of Digital ASIC Design, we need 3 components:
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Digital%20ASIC%20Design.png)
+
+- RTL design: Available on librecores.org, opencores.org or github.com.
+- EDA tools: Qflow, OpenRoad, Openlane, Magic, Spice simulation.
+- PDK(Process Design Kit): It is a collection of files used to model a fabrication. Here we used open source pdk of Google's skywater 130nm pdk.
+
+Detailed description on how to build and invoke openlane is given [here](https://github.com/nickson-jose/openlane_build_script).
+
+# 4. Building Design in Openlane
+
+- Openlane is opened in interactive mode(step by step) by traversing to the directory - "openlane_working_dir". 
+```
+./flow.tcl -interactive
+```
+- Some input packages are needed to run this flow:
+```
+package require openlane 0.9
+```
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/invoking%20openlane.png)
+
+## Preparation:
+
+- Before staring the flow, we first need to prepare the design by setting up the files with respect to the flow. Openlane as approximately 30-40 designs of which we chose a design based on RISC-V architecture (picorv32a).
+```
+prep -design picorv32a
+```
+- Under this design you will find config.tcl file which contains the configuration of this specific design. The default values from openlane by overidden by the values of this design. Here is how it looks:
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/preping%20design.png)
+
