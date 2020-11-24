@@ -203,3 +203,63 @@ Here is the how the layout of standard cells is seen after the placement stage:
 ![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Placement/std%20cells%20after%20run_placement.png)
 
 Here DEF and LEF are files which contains some placement information. It will be discussed in next section when we plug in the custom layout of inverter into picorv32a design.
+
+## Cell design and characterization:
+
+- Clone the git [link](https://github.com/nickson-jose/vsdstdcelldesign). This contains the .mag file of custom layout of the inverter. 
+- Copy the folder into the folder /vsdstdcelldesign. 
+- Launch maic from this location by using command ```magic -T sky130.tech sky130_inv.mag &```
+
+This is how the layout looks like:
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Cell%20design%20and%20characterization/cmos%20inverter.png)
+
+- To create extraction files:
+```
+extract all
+```
+
+- To spice file to be used in ngspice. These are to extract parasitic capacitances
+```
+ext2spice cthresh 0 rthresh 0
+ext2spice
+```
+
+Please find the snapshot below:
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Cell%20design%20and%20characterization/ext2spice.png)
+
+- Make the specified changes in the extracted spice file which include libraries, power supply, type of analysis(transient) etc. Snapshot below
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Cell%20design%20and%20characterization/spice_file.png)
+
+- Navigate to vsdcelldesign folder and run this command to execute ngspice:
+```
+ngspice sky130_inv.spice
+```
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Cell%20design%20and%20characterization/ngspice.png)
+
+- After invoking ngspice at the prompt we need to spcify the values between which we want the plot
+```
+plot y time a
+```
+
+This is the transient plot which we asked for;
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Cell%20design%20and%20characterization/transient.png)
+
+- Now characterizing a cell can be done by finding 4 parameters -> rise transition, fall transition, fall cell delay(propagation delay) and rise cell delay(propagation delay)
+  - Rise transition: Time taken by a signal to go from 20% to 80% of its maximum value.
+  - Fall transition: Time taken by a signal to go from 80% to 20% of its maximum value.
+  - Rise cell delay(propagation delay): For any propagation delay is measured between 50% of input fall transition to the
+corresponding 50% of output rise transition.
+  - Fall cell delay(propagation delay): For any propagation delay is measured between 50% of input rise transition to the
+corresponding 50% of output fall transition.
+  - Since the maximum value of voltage is 3.3v:
+    - 20% of 3.3 = 0.66v -> 2.18198e-09
+    - 80% of 3.3 = 2.64v -> 2.24605e-09
+    therefore, 
+    1. rise transition = 2.24605-2.18198
+                               = 0.064ns
+    
