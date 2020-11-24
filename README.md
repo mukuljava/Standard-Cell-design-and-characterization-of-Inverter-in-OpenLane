@@ -32,7 +32,7 @@ The normal generalized ASIC flow starts from Synthesis of RTL netlist and ends t
 - Cell mappimg is done to define a particular area for cell placement.
 - Pre-Layout Static Timing Analysis is done using OpenSTA.
 
-### Floorplanning 
+### Floorplanning/Power Planning
 
 - Floorplanning is all about arranging system building blocks, pre-placed cells, decoupling capacitors, power planning, I/O pads placement in a proper way. Here power planning is done after routing. These pre-placed cells such as SRAM, ADC/DAC, PLL are called as IPs (Intellectual Property). 
 - Dimensions, pin locations and tracks of the cell are defined.
@@ -108,3 +108,51 @@ prep -design picorv32a
 
 ![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/preping%20design.png)
 
+# 5. RTL to GDSII flow:
+
+## Synthesis:
+
+After preparation the next step is to do synthesis. The following command runs Yosys and abc for synthesis:
+```
+run_synthesis
+```
+After synthesis the following configuration is observed:
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Synthesis/after_synthesis_config.png)
+
+Here, we can see the flop ratio:
+
+Flop ratio = No. of DFFs / Total no. of cells
+           = 1634/17323
+           = 0.094
+           
+Successful synthesis with slack:
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Synthesis/synthesis%20success.png)
+
+After successfully running synthesis some files/reports are generated. These reports contain synthesized netlist:
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Synthesis/after%20running%20run_synthesis.png)
+
+## Floorplan:
+
+- Default settings: openLane_flow/configurations/floorplan.tcl
+Here the default settings are: VMETAL = 2, HMETAL = 3
+
+Now set the switches of vertical and horizontal metal layer by commands:
+```
+set ::env(FP_IO_HMETAL) 3
+set ::env(FP_IO_VMETAL) 4
+```
+Now, run the floorplan step by executing the command:
+```
+run_floorplan
+```
+Successful running of floorplan step is shown in below snapshot:
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Floorplan/run_floorplan.png)
+
+To see whether the changes are implemented or not open the .def file which will be found in the following path. In this file you can also observe the die area:
+openLane_flow/designs/picorv32a/runs/17-10_10-23(this folder is created after you do synthesis)/results/floorplan/picorv32a.floorplan.def/
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Floorplan/overriden_values.png)
+
+Below snapshot shows the die area after the floorplan step in which the coordinates can be read as(Lower left X value, Lower left Y value)(Upper right X value, Upper right Y value).
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Floorplan/die_area.png)
