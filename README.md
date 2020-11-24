@@ -256,10 +256,24 @@ This is the transient plot which we asked for;
 corresponding 50% of output rise transition.
   - Fall cell delay(propagation delay): For any propagation delay is measured between 50% of input rise transition to the
 corresponding 50% of output fall transition.
-  - Since the maximum value of voltage is 3.3v:
+  - Since the maximum value of voltage is 3.3v, there for rise transition:
     - 20% of 3.3 = 0.66v -> 2.18198e-09
     - 80% of 3.3 = 2.64v -> 2.24605e-09
     therefore, 
-    1. rise transition = 2.24605-2.18198
-                               = 0.064ns
     
+    1. rise transition = 2.24605-2.18198
+                       = 0.064ns
+  - For fall transition, 2.64v -> 4.0525e-09 and 0.66v -> 4.0949e-09
+  
+    2. rise transition = 4.0949-4.0525
+                       = 0.0424ns
+  - For propagation delay, 50% = 1.65v
+  
+    3. rise delay = o/p rise -i/p fall
+                  = 2.21065e-09 - 2.15022e-09
+                  = 0.06043ns
+                  
+    4. fall delay = o/p fall - i/p rise
+                  = 4.07748e-09 - 4.0501e-09
+                  = 0.02738ns
+
