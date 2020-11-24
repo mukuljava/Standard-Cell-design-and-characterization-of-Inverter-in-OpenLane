@@ -96,6 +96,7 @@ Detailed description on how to build and invoke openlane is given [here](https:/
 ```
 package require openlane 0.9
 ```
+
 ![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/invoking%20openlane.png)
 
 ## Preparation:
@@ -117,6 +118,7 @@ After preparation the next step is to do synthesis. The following command runs Y
 run_synthesis
 ```
 After synthesis the following configuration is observed:
+
 ![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Synthesis/after_synthesis_config.png)
 
 Here, we can see the flop ratio:
@@ -126,9 +128,11 @@ Flop ratio = No. of DFFs / Total no. of cells
            = 0.094
            
 Successful synthesis with slack:
+
 ![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Synthesis/synthesis%20success.png)
 
 After successfully running synthesis some files/reports are generated. These reports contain synthesized netlist:
+
 ![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Synthesis/after%20running%20run_synthesis.png)
 
 ## Floorplan:
@@ -155,4 +159,47 @@ openLane_flow/designs/picorv32a/runs/17-10_10-23(this folder is created after yo
 ![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Floorplan/overriden_values.png)
 
 Below snapshot shows the die area after the floorplan step in which the coordinates can be read as(Lower left X value, Lower left Y value)(Upper right X value, Upper right Y value).
+
 ![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Floorplan/die_area.png)
+
+To see the actual layout after the floorplan open Magic by using command:
+```
+magic -T ~/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
+```
+
+This is how it looks like:
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Floorplan/magic.png)
+
+These are the standard cells:
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Floorplan/standard%20cells.png)
+
+*Note: Floorplan does not take care of standard cells. Power distribution is done in floorplanning in an ideal terms but in openlane, order is little bit different. Floorplan does not create power distribution network. We do power/ground generation post placement and CTS.*
+
+## Placement:
+
+The next step is the placement step by using command:
+```
+run_placement
+```
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Placement/run_placement.png)
+
+As the overflow(OVFL) decrease, there is increase the number of iterations, this helps in converging the design. 
+
+There are two ways in which placement is done:
+- Global Placement: It is also called as coarse placement. PnR tool will determine the approximate position of wach cell according to timing and congestion. Coarse placement is mainly performing for initial timing and congestion analysis.
+
+- Detailed Placement: It means that standardization or proper placement of cells in done in rows and there are no overlaps.
+
+To observer the layout after placement stage navigate to the following path:
+```
+magic -T ~/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+```
+
+Here is the how the layout of standard cells is seen after the placement stage:
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Placement/std%20cells%20after%20run_placement.png)
+
+Here DEF and LEF are files which contains some placement information. It will be discussed in next section when we plug in the custom layout of inverter into picorv32a design.
