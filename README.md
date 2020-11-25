@@ -300,3 +300,39 @@ This is how it is done
 - After conversion the tracks need to be saved using command:
 ```save sky130_vsdinv.mag```
 
+- Extract the lef file from magic using the command in tkcon window:
+
+```lef write```
+
+## Plugging the lef file into Openlane
+
+- Copy the created lef file to the src folder of picorv32a design.
+- We need to add custom cells into openalne flow.
+- Lib files are needed which are present in directory of vsdcelldesign.
+- Copy these lib files as well.
+- Make some changes in the config.tcl file as shown:
+- Also add this line:
+```set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef]```
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/LEF%20extraction%20and%20plugging/config_file.png)
+
+- Now invoke openalne using the same commands used in 3.
+
+- After invoking add the 2 files to ensure openlane flow takes our lef files
+
+```
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+```
+
+Here is the snapshot:
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/LEF%20extraction%20and%20plugging/lef_preparation.png)
+
+- Now run synthesis to include the custime lef file into the design by running command: ```run_synthesis```
+
+- We can now see the changes made to the design as it includes the instance of the custom inverter and the value of slack.
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/LEF%20extraction%20and%20plugging/custom_inv_instance.png)
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/LEF%20extraction%20and%20plugging/synhtesis%20after%20doing%20chnages%20in%20config.tcl%20and%20adding%20lef%20files%20.png)
