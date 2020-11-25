@@ -269,11 +269,34 @@ corresponding 50% of output fall transition.
                        = 0.0424ns
   - For propagation delay, 50% = 1.65v
   
-    3. rise delay = o/p rise -i/p fall
+    3. rise delay = o/p rise - i/p fall
                   = 2.21065e-09 - 2.15022e-09
                   = 0.06043ns
                   
     4. fall delay = o/p fall - i/p rise
                   = 4.07748e-09 - 4.0501e-09
                   = 0.02738ns
+
+## Extraction of LEF file
+
+- What is a lef file? It can be found out from this [link](https://github.com/nickson-jose/vsdstdcelldesign#defining-lef-properties-and-extracting-lef-file).
+
+- There are some guidelines to make standard cell set before we extract a lef file:
+  - IO ports must lie on the intersection of the vertical and horizontal tracks.
+  - Width of standard cell should be in odd multiples of the track pitch and Height in odd multiples of the vertical path.
+  - Defining port and setting correct class and use attributes to each port is the first step. Find the steps [here](https://github.com/nickson-jose/vsdstdcelldesign#create-port-definition).
+
+- Press g to activate the grid. This is how it looks. 
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/LEF%20extraction%20and%20plugging/grid%20changes.png)
+
+- Convert the grids into tracks by executing this command in tkcon window:
+```grid 0.46 0.34 0.23 0.17```
+
+This is how it is done
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/LEF%20extraction%20and%20plugging/grid_conversion.png)
+
+- After conversion the tracks need to be saved using command:
+```save sky130_vsdinv.mag```
 
