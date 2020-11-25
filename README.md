@@ -8,7 +8,7 @@ The project involves the full ASIC implementation steps from RTL to GDSII, where
 
 [2. Physical Design Flow](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#2-physical-design-flow)
 
-[3. Invoking and running Openlane](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#invoking-and-running-openlane)
+[3. Invoking and running Openlane](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#3invoking-and-running-openlane)
 
 # 1. Introduction to Openlane
 
@@ -74,7 +74,7 @@ run_cts
 - Timing Verification like Static Timing Analysis
 - Lastly final GDSII layout file is streamed out from routed def(Magic).
 
-# 3.Invoking and running Openlane
+# 3. Invoking and running Openlane
 
 ### For open-source implementation of Digital ASIC Design, we need 3 components:
 
@@ -432,5 +432,33 @@ In this way we can increase the size of the buffer and improve the timing
   - To calculate actual cell delay: ```set_propagated_clock [all_clocks]
   - report_checks -path_delay min_max -fields {slew trans set cap input_pin} -format full_clock_expanded -digits 4
   - Now the slack came out to be = 4.656ns and Hold = 0.388ns 
-  - Now exit
+  - Now exit openroad
   
+## PDN and Routing
+
+- We need to check the last step which was performed to check current .def. 
+
+```echo $::env(CURRENT_DEF)``` This will tell that the current def is *cts.def*
+
+- Now we need to do routing, but before that we have Power Distribution Network which ideally is done during floorplan but due to adjustments in openlane we did not do it. Hence we will do it now.
+
+```gen_pdn```
+
+- It creates .lef and .def file. It also creates grids and tracks for power and ground.
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/PDN%20and%20Routing/gen_pdn.png)
+
+- For routing we will be using TritonCTS route. The routing ranges from 0 to 3 and 14.
+  - 0-3: It takes approximately 30 mins to route. It also requires less memory.
+  - 14: It takes approximately 45 mins to route. It requires more memory.
+
+- You can check which range is used and set it to 14 by:
+
+```echo $::env(ROUTING_STRATEGY)```
+```set ::env(ROUTING_STRATEGY) 14```
+
+- Now start routing by using command
+
+```run_routing```
+
+![alt text]()
