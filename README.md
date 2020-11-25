@@ -373,8 +373,64 @@ magic -T ~/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/
 
 - To check the pre sta configuration, create a file naming pre_sta.conf in openlane directory
   - Copy the file my_base.sdc from extras folder to src folder
-  - execute the sta command to run pre sta condition: ```run sta pre_sta.conf``` to get the slack of -3.36. See below snapshot.
+  - execute the sta command to run pre sta condition: ```sta pre_sta.conf``` to get the slack of -3.36ns. See below snapshot.
   
 ![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Timing%20Violation/sta%20pre_sta.conf.png)
   
-- Optimize the delays as Fanouts increases when delay increase.
+- Optimize the delays as Fanouts increases when delay increase. We can reduce the fanouts by command:
+
+```set ::env(SYNTH_MAX_FANOUT) 4```
+
+- Now run synthesis again to check the slack
+
+- To check the nets with driver and fanouts use command:
+
+```report_net -connections _12904_```, where _12904_ is net.
+
+Here is the snapshot:
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Timing%20Violation/to%20check%20te%20load%20of%20driver.png)
+
+- Now again execute: ```sta pre_sta.conf``` to get the slack of -1.76ns.
+- Now we can replace the cell instance with a bigger buffer. It will increase the size of the design but timing is improved.
+
+```replace_cell _41881_ sky130_fd_sc_hd_buf_4```
+
+In this way we can increase the size of the buffer and improve the timing
+
+## Clock Tree Synthesis(CTS)
+
+- To create a new netlist to be used by openlane flow:
+
+```write_verilog /openlane_flow/........../results/synthesis/picorv32a/synthesis.v``` This will overwrite current verilog file.
+
+- To check whether this is the new verilog file just check the last cell which is replaced.
+
+- Hence, we will not do syntesis again or else it will take previous netlist.
+
+- Now do run_floorplan and run_placement 
+
+- Now run clock tree synthesis by executing command: ```run_cts```
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/CTS/cts_run.png)
+
+- This creates a file cts.v where buffers are added
+
+- Check the current DEF(Design Exchange Format)
+
+```echo $::env(CURRENT_DEF)```
+
+- Start Openroad to do some STA by executing ``` openroad```
+  - First create db by executing: ```read_lef /openlane/designs/picorv32a/runs/trials1/tmp/merged.lef```
+  - ```read_def /openlane/designs/picorv32a/runs/trials1/results/cts/pricorv32a.cts.def```
+  - ```write_db pico_cts.db```
+  - ```read_db pico_cts.db```
+  - ```read_verilog openLANE_flow/designs/picorv32a/...../results/synthesis/picorv32a.synthesis.cts.v```
+  - ```read_liberty -max $::env(LIB_MAX)```
+  - ```read_liberty -min $::env(LIB_MIN)```
+  - ```read_sdc openLANE_flow/designs/picorv32a/src/my_base.sdc```
+  - To calculate actual cell delay: ```set_propagated_clock [all_clocks]
+  - report_checks -path_delay min_max -fields {slew trans set cap input_pin} -format full_clock_expanded -digits 4
+  - Now the slack came out to be = 4.656ns and Hold = 0.388ns 
+  - Now exit
+  
