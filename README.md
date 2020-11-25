@@ -8,7 +8,7 @@ The project involves the full ASIC implementation steps from RTL to GDSII, where
 
 [2. Physical Design Flow](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#2-physical-design-flow)
 
-[3. Invoking and running Openlane](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#3invoking-and-running-openlane)
+[3. Invoking and running Openlane](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#3-invoking-and-running-openlane)
 
 # 1. Introduction to Openlane
 
