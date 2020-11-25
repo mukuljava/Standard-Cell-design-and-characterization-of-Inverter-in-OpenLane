@@ -461,4 +461,38 @@ In this way we can increase the size of the buffer and improve the timing
 
 ```run_routing```
 
-![alt text]()
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/PDN%20and%20Routing/routing%20completed.png)
+
+- It first performs Global Route which is done by Fast Route. Output is set of the routing guides for each of the nets.
+
+- It then performs Detailed Route executed by Triton Route which honours preprocessed routing guides(obtained after fast route) i.e., attempts as much as possible to route within route guides.
+
+- Works on propsed Mixed Integer Linear Programming (MILP) based routing scheme with intra-layer parallel and inter-layer sequential routing framework.
+
+- So here can see that the memory required is 545.41MB with 0 violations. Had routing been done at some different range, it could have shown some violations and less memory.
+
+## SPEF and GDSII
+
+- Now we will extract SPEF(Standard Parasitic Exchange Format) file outside openlane. Navigate to this path - ~/work/tools/SPEF_EXTRACTOR
+
+- To generate SPEF we need to specify the LEF and DEF file - ```python3 main.py /openLANE_flow/designs/picorv32a/runs/trial1/tmp/merged.lef /openLANE_flow/designs/picorv32a/runs/trial1/results/routing/picorv32a.def```
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/SPEF%20and%20GDSII/spef_extraction.png)
+
+- SPEF file is generated in the routing folder. Here is the snapshot:
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/SPEF%20and%20GDSII/spef%20file%20generated.png)
+
+- Here is the snippet from SPEF file:
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/SPEF%20and%20GDSII/snippet%20of%20spef%20file.png)
+
+- GDS file is generated from the routed def. See the snapshot here:
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/SPEF%20and%20GDSII/gds%20file%20created.png)
+
+- To read the .gds file go to magic and in the tkcon window execute - 
+
+```gds read picorv32a.gds```
+
+- This will open the gds file. It takes some time as this is a heavy one. The file contains all the information of the design which we designed.
