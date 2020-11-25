@@ -336,3 +336,45 @@ Here is the snapshot:
 ![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/LEF%20extraction%20and%20plugging/custom_inv_instance.png)
 
 ![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/LEF%20extraction%20and%20plugging/synhtesis%20after%20doing%20chnages%20in%20config.tcl%20and%20adding%20lef%20files%20.png)
+
+## Improving timing violation:
+
+- After synthesis, the worst negative slack(WNS) came out to be negative(-17.96), which is not acceptable. Timing constraints are very important and hence need to be improved.
+- We need to check the strategy which defines the balance between delay and area. If the strategy is set to 2, we reset it to 1. Here are the commands respectively:
+
+```
+echo $::env(SYNTH_STRATEGY)
+set ::env(SYNTH_STRATEGY) 1
+```
+
+*Note: This will increase the area but improves the timing*
+
+- Another method to improve timing is sizing the cells i.e upsizing or downsizing the cells. We are upsizing the cell if the value is 1:
+
+```
+echo $::env(SYNTH_SIZING)
+set ::env(SYNTH_SIZING) 1
+```
+- Now again execute ```run_synthesis``` to check the slack.
+- run_floorplan
+- run_placement
+- Check the results in ~/trial/result/placement
+- Now run magic to see the instances of the cell we plugged in:
+
+```
+magic -T ~/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+```
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Timing%20Violation/vsdinv%20instances.png)
+
+- Power and Ground rails are shared, called as abutment. See the snapshot:
+
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Timing%20Violation/abutment%20.png)
+
+- To check the pre sta configuration, create a file naming pre_sta.conf in openlane directory
+  - Copy the file my_base.sdc from extras folder to src folder
+  - execute the sta command to run pre sta condition: ```run sta pre_sta.conf``` to get the slack of -3.36. See below snapshot.
+  
+![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/Timing%20Violation/sta%20pre_sta.conf.png)
+  
+- Optimize the delays as Fanouts increases when delay increase.
