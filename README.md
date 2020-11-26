@@ -436,7 +436,7 @@ In this way we can increase the size of the buffer and improve the timing
 
 ```echo $::env(CURRENT_DEF)```
 
-- Start Openroad to do some STA by executing ``` openroad```
+- Start Openroad to do some STA by executing: ``` openroad```
   - First create db by executing: ```read_lef /openlane/designs/picorv32a/runs/trials1/tmp/merged.lef```
   - ```read_def /openlane/designs/picorv32a/runs/trials1/results/cts/pricorv32a.cts.def```
   - ```write_db pico_cts.db```
@@ -445,8 +445,8 @@ In this way we can increase the size of the buffer and improve the timing
   - ```read_liberty -max $::env(LIB_MAX)```
   - ```read_liberty -min $::env(LIB_MIN)```
   - ```read_sdc openLANE_flow/designs/picorv32a/src/my_base.sdc```
-  - To calculate actual cell delay: ```set_propagated_clock [all_clocks]
-  - report_checks -path_delay min_max -fields {slew trans set cap input_pin} -format full_clock_expanded -digits 4
+  - To calculate actual cell delay: ```set_propagated_clock [all_clocks]```
+  - To check slack: ```report_checks -path_delay min_max -fields {slew trans set cap input_pin} -format full_clock_expanded -digits 4```
   - Now the slack came out to be = 4.656ns and Hold = 0.388ns 
   - Now exit openroad
   
