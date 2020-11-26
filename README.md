@@ -23,7 +23,8 @@ The project involves the full ASIC implementation steps from RTL to GDSII, where
   - [Clock tree Synthesis](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#clock-tree-synthesiscts)
   - [PDN and Routing](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#pdn-and-routing)
   - [SPEF and GDSII](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#spef-and-gdsii)
-  - [Acknowledgements]()
+ 
+[6. Acknowledgements](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#6-acknowledgements)
 
 # 1. Introduction to Openlane
 
@@ -513,7 +514,6 @@ Here is the snapshot:
 ```gds read picorv32a.gds```
 
 - This will open the gds file. It takes some time as this is a heavy one. The file contains all the information of the design which we designed.
-
 
 # 6. Acknowledgements
 
