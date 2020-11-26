@@ -514,6 +514,7 @@ Here is the snapshot:
 
 - This will open the gds file. It takes some time as this is a heavy one. The file contains all the information of the design which we designed.
 
+
 # 6. Acknowledgements
 
 - [Kunal Ghosh](https://github.com/kunalg123), Co-founder (VSD Corp. Pvt. Ltd)
