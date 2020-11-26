@@ -20,7 +20,7 @@ The project involves the full ASIC implementation steps from RTL to GDSII, where
   - [Extraction of LEF file](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#extraction-of-lef-file)
   - [Plugging the lef file into Openlane](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#plugging-the-lef-file-into-openlane)
   - [Improving Timing Violation](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#improving-timing-violation)
-  - [Clock tree Synthesis](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#clock-tree-synthesiscts)
+  - [Clock Tree Synthesis](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#clock-tree-synthesiscts)
   - [PDN and Routing](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#pdn-and-routing)
   - [SPEF and GDSII](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#spef-and-gdsii)
  
@@ -353,7 +353,7 @@ Here is the snapshot:
 
 ![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/LEF%20extraction%20and%20plugging/synhtesis%20after%20doing%20chnages%20in%20config.tcl%20and%20adding%20lef%20files%20.png)
 
-## Improving timing violation:
+## Improving Timing Violation:
 
 - After synthesis, the worst negative slack(WNS) came out to be negative(-17.96), which is not acceptable. Timing constraints are very important and hence need to be improved.
 - We need to check the strategy which defines the balance between delay and area. If the strategy is set to 2, we reset it to 1. Here are the commands respectively:
