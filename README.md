@@ -14,6 +14,16 @@ The project involves the full ASIC implementation steps from RTL to GDSII, where
 
 [5. RTL to GDSII flow](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#5-rtl-to-gdsii-flow)
   - [Synthesis](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#synthesis-1)
+  - [Floorplan](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#floorplan)
+  - [Placement](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#placement-1)
+  - [Cell design and Characterization](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#cell-design-and-characterization)
+  - [Extraction of LEF file](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#extraction-of-lef-file)
+  - [Plugging the lef file into Openlane](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#plugging-the-lef-file-into-openlane)
+  - [Improving Timing Violation](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#improving-timing-violation)
+  - [Clock tree Synthesis](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#clock-tree-synthesiscts)
+  - [PDN and Routing](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#pdn-and-routing)
+  - [SPEF and GDSII](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane#spef-and-gdsii)
+  - [Acknowledgements]()
 
 # 1. Introduction to Openlane
 
@@ -466,6 +476,8 @@ In this way we can increase the size of the buffer and improve the timing
 
 ```run_routing```
 
+Here is the snapshot:
+
 ![alt text](https://github.com/mukuljava/Standard-Cell-design-and-characterization-of-Inverter-in-OpenLane/blob/main/Openlane/PDN%20and%20Routing/routing%20completed.png)
 
 - It first performs Global Route which is done by Fast Route. Output is set of the routing guides for each of the nets.
@@ -501,3 +513,8 @@ In this way we can increase the size of the buffer and improve the timing
 ```gds read picorv32a.gds```
 
 - This will open the gds file. It takes some time as this is a heavy one. The file contains all the information of the design which we designed.
+
+# 6. Acknowledgements
+
+- [Kunal Ghosh](https://github.com/kunalg123), Co-founder (VSD Corp. Pvt. Ltd)
+- [Nickson Jose](https://github.com/nickson-jose)
