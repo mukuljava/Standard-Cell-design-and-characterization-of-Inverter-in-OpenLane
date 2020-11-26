@@ -518,4 +518,4 @@ Here is the snapshot:
 # 6. Acknowledgements
 
 - [Kunal Ghosh](https://github.com/kunalg123), Co-founder (VSD Corp. Pvt. Ltd)
-- [Nickson Jose](https://github.com/nickson-jose)
+- [Nickson Jose](https://github.com/nickson-jose), Teaching Assistant (VSD Corp. Pvt. Ltd.)
